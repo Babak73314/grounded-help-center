@@ -1,0 +1,131 @@
+name: CI
+
+# Lint, types, tests and CDK synthesis. Nothing here deploys, and nothing
+# needs a secret, a variable or an AWS account.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  web:
+    name: Site — lint, types, unit tests, build, publication guard
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Lint (all three packages)
+        run: npm run lint
+      - name: Type-check
+        run: npm run typecheck
+      - name: Unit tests (content, provenance against the architecture overview, corpus, publication guard)
+        run: npm test
+      - name: Build the static export and check every link and anchor
+        run: npm run build
+      - name: Publication guard
+        run: npm run check:public
+
+  backend:
+    name: Backend — types, tests on PostgreSQL in WebAssembly, offline evaluation
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      - run: npm ci --prefix backend
+      - name: Type-check
+        run: npm run typecheck --prefix backend
+      - name: Tests and the offline evaluation (the live evaluation is skipped)
+        run: npm test --prefix backend
+
+  infra:
+    name: Infrastructure — types, tests and CDK synthesis (no AWS account)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: infra
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: |
+            infra/package-lock.json
+            backend/package-lock.json
+      # Synthesis bundles the Lambda functions from backend/, so its packages are installed too.
+      - run: |
+          npm ci
+          npm ci --prefix ../backend
+      - name: Type-check
+        run: npm run typecheck
+      - name: Unit tests
+        run: npm test
+      - name: Synthesize — defaults (local writer and embedder, no domain)
+        run: npx cdk synth --quiet
+      - name: Synthesize — Bedrock and a custom domain (reserved example values)
+        run: >-
+          npx cdk synth --quiet
+          -c modelProvider=bedrock -c bedrockModelId=anthropic.example-model
+          -c embeddingProvider=bedrock -c bedrockEmbeddingModelId=amazon.example-embedding
+          -c domainName=help-center.example -c hostedZoneId=ZONE-PLACEHOLDER
+
+  integration:
+    name: End to end — the local server on PostgreSQL with pgvector
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      db:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: help
+          POSTGRES_PASSWORD: help
+          POSTGRES_DB: help
+        ports:
+          - 5433:5432
+        options: >-
+          --health-cmd "pg_isready -U help -d help"
+          --health-interval 2s --health-timeout 3s --health-retries 30
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            backend/package-lock.json
+      - run: |
+          npm ci
+          npm ci --prefix backend
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Build the static export
+        run: npm run build
+      - name: End-to-end and accessibility tests
+        run: npm run test:e2e
+      - name: Upload the test report
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7

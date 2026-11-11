@@ -1,0 +1,32 @@
+# dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+
+# tests
+playwright-report/
+test-results/
+blob-report/
+coverage/
+
+# AWS CDK
+infra/cdk.out/
+infra/cdk.context.json
+
+# local environment
+.env*
+!.env.example
+*.local
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Evaluation results are written by the runs, not kept
+backend/eval/results/

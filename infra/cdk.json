@@ -1,0 +1,9 @@
+{
+  "app": "npx tsx bin/help-center.ts",
+  "context": {
+    "@aws-cdk/aws-s3:createDefaultLoggingPolicy": true,
+    "@aws-cdk/core:checkSecretUsage": true,
+    "@aws-cdk/aws-iam:minimizePolicies": true,
+    "@aws-cdk/core:enablePartitionLiterals": true
+  }
+}

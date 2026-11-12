@@ -1,8 +1,8 @@
 /**
- * Contact details and addresses that exist only at run time, to prove that a
- * check refuses them. They are assembled from parts, under the reserved
+ * Contact details, addresses and keys that exist only at run time, to prove
+ * that a check refuses them. They are assembled from parts, under the reserved
  * `.invalid` domain, so that no committed file contains an e-mail address,
- * telephone number or URL — not even as an example.
+ * telephone number, URL or access key — not even as an example.
  */
 export const synthetic = {
   email: () => ['reader', 'mail.invalid'].join('@'),
@@ -11,4 +11,5 @@ export const synthetic = {
   accountId: () => '4'.repeat(12),
   arn: () => ['arn', 'aws', 'iam', '', '4'.repeat(12), 'role/x'].join(':'),
   domain: () => ['www', 'example', 'com'].join('.'),
+  accessKey: () => ['AKIA', 'Z'.repeat(16)].join(''),
 };

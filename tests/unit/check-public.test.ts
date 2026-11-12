@@ -1,3 +1,6 @@
+import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { checkPublic, findProblems, trackedFiles } from '../../scripts/check-public.mjs';
 import { synthetic } from './synthetic';
@@ -17,6 +20,24 @@ describe('the publication guard', () => {
     expect(findProblems(['https:', '', 'github.com', 'Babak73314', 'grounded-help-center'].join('/'))).toEqual([]);
     expect(findProblems(['http:', '', '127.0.0.1:3000', ''].join('/'))).toEqual([]);
     expect(findProblems('ASP.NET Core and 228,000 lines, 45,000 lines')).toEqual([]);
+  });
+
+  it('reports the file, the line and the rule, never the matched value', () => {
+    const email = synthetic.email();
+    const key = synthetic.accessKey();
+    const dir = mkdtempSync(join(tmpdir(), 'check-public-'));
+    try {
+      const file = join(dir, 'leak.txt');
+      writeFileSync(file, `write to ${email}\nkey ${key}\n`);
+      const { problems } = checkPublic([file]);
+      expect(problems).toEqual([`${file}:1: e-mail address`, `${file}:2: AWS access key`]);
+      for (const problem of problems) {
+        expect(problem).not.toContain(email);
+        expect(problem).not.toContain(key);
+      }
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
   });
 
   it('passes on every file this repository tracks', () => {

@@ -62,13 +62,17 @@ const FORBIDDEN_FILES = [/(^|\/)\.env(?!\.example$)[^/]*$/, /(^|\/)cdk\.context\
 const LOCKFILE = /(^|\/)package-lock\.json$/;
 const BINARY = /\.(png|jpe?g|gif|webp|ico|woff2?|pdf|zip)$/i;
 
-/** Every problem in one text: `{ rule, match, line }`. */
+/**
+ * Every problem in one text: `{ rule, line }`. The matched value is left out on
+ * purpose: the guard's output lands in public CI logs, and repeating a leaked
+ * address or key there would publish it a second time.
+ */
 export function findProblems(text) {
   const problems = [];
   for (const rule of RULES) {
     for (const match of text.matchAll(rule.pattern)) {
       if (rule.keep && !rule.keep(match[0], text, match.index)) continue;
-      problems.push({ rule: rule.id, match: match[0], line: text.slice(0, match.index).split('\n').length });
+      problems.push({ rule: rule.id, line: text.slice(0, match.index).split('\n').length });
     }
   }
   return problems;
@@ -92,7 +96,7 @@ export function checkPublic(files) {
     }
     if (BINARY.test(file)) continue;
     for (const problem of findProblems(readFileSync(file, 'utf8'))) {
-      problems.push(`${file}:${problem.line}: ${problem.rule} "${problem.match}"`);
+      problems.push(`${file}:${problem.line}: ${problem.rule}`);
     }
   }
   return { problems, scanned: files.length - lockfiles.length, lockfiles };

@@ -71,10 +71,15 @@ export function stems(text: string): string[] {
  * searchable is left.
  */
 export function prefixQuery(text: string): string {
-  return stems(text)
+  return prefixTerms(stems(text)).join(' | ');
+}
+
+/** One `to_tsquery('simple', …)` prefix term per stem (`deploy:*`), at most 24, and only stems of `[a-z0-9]`. */
+export function prefixTerms(terms: readonly string[]): string[] {
+  return terms
+    .filter((term) => /^[a-z0-9]+$/.test(term))
     .slice(0, 24)
-    .map((term) => `${term}:*`)
-    .join(' | ');
+    .map((term) => `${term}:*`);
 }
 
 /** Whether a stem starts any word of an already folded text. */

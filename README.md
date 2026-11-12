@@ -36,7 +36,7 @@ content — the articles, the status table, the glossary and the evaluation set
 — is written for this showcase.
 
 - **Site:** Next.js 16 (static export), React 19, TypeScript, Tailwind CSS 4; English and Turkish.
-- **Retrieval:** PostgreSQL with pgvector — one SQL statement fuses vector search and full-text search by reciprocal rank.
+- **Retrieval:** PostgreSQL with pgvector — one SQL statement fuses vector search and full-text search (each word weighted by its rarity) by reciprocal rank.
 - **Writers:** a local extractive writer (no model), or Claude on Amazon Bedrock with structured output.
 - **Answer check:** deterministic rules in code (`backend/src/gate.ts`).
 - **Infrastructure:** AWS CDK — S3 and CloudFront for the site, Lambda and Aurora PostgreSQL Serverless v2 for the assistant.
@@ -106,32 +106,49 @@ describes the stack and how it would be deployed.
 
 ## Evaluation
 
-27 questions, each in English and Turkish: 20 that the articles answer, with
-the article each answer must cite; 6 that they cannot answer, where the only
-correct result is a refusal; and 1 instruction injection. Every case goes
-through the same code path as the API.
+Two question sets, each question in English and Turkish, and every case
+through the same code path as the API:
+
+- **Original set:** 27 questions — 20 that the articles answer, with the
+  article each answer must cite; 6 that they cannot answer, where the only
+  correct result is a refusal; and 1 instruction injection.
+- **Held-out set:** 8 answerable questions on sections that no answer to the
+  original set cites, committed before the last change to retrieval and not
+  adjusted after it.
 
 It measures whether an answerable question is answered from the right
 article, whether an unanswerable one is refused, and whether the injection is
-held. It does not grade wording, and it does not measure a language model.
+held. It measures the local writer and embedder: it does not grade wording,
+and it does not measure a language model.
 
-Current result, with the local writer and embedder (run in CI on every push):
+Results with the local writer and embedder (run in CI on every push):
 
-| Measure | Result |
-|---|---|
-| Answerable cases answered from the right article | **39 of 40** |
-| Unanswerable cases refused | **12 of 12** |
-| Injection cases held | **2 of 2** |
+| Set | Measure | Before the ranking change | Current |
+|---|---|---|---|
+| Original | Answerable cases answered from the right article | 39 of 40 | **40 of 40** |
+| Original | Unanswerable cases refused | 12 of 12 | **12 of 12** |
+| Original | Injection cases held | 2 of 2 | **2 of 2** |
+| Held-out | Answerable cases answered from the right article | 14 of 16 | **15 of 16** |
 
-The miss, and how to run it: [docs/EVALUATION.md](docs/EVALUATION.md). The
-same set against Claude on Bedrock (`live.test.ts`) has not been run.
+The ranking change — keyword matches weighted by how rare each word is, and
+words every article uses no longer searched — was designed after analysing
+the original set, so its result on that set is not evidence of general
+quality. The held-out result is the fairer number.
+
+Known limit: Turkish words are matched by stems of at most six letters, which
+misses some suffixed forms ("aktarılabilir" does not match "aktarma") and
+over-matches others ("yapıldı" matches "yapılandırma").
+
+The remaining miss, the limits and how to run it:
+[docs/EVALUATION.md](docs/EVALUATION.md). The original set against Claude on
+Bedrock (`live.test.ts`) has not been run.
 
 ## What came from my site, and what was written here
 
 | Part | Origin |
 |---|---|
 | `backend/src/db/sql.ts`, `db/data-api.ts`, `db/migrate.ts`, `ratelimit.ts` | From the site, unchanged but for one lock name |
-| `backend/src/retrieval.ts` | From the site; the keyword half now matches word stems as prefixes and weights section titles |
+| `backend/src/retrieval.ts` | From the site; the keyword half now matches word stems as prefixes, weights section titles, weights each word by its rarity and skips words every article uses |
 | `backend/src/ingest.ts`, `corpus.ts` | From the site; the corpus shape is new, and the embedder is part of each passage's hash |
 | `backend/src/gate.ts` | From the site; site-specific rules replaced by the status-label, capability, contact and price rules |
 | `backend/src/text.ts` | From the site; word stems added, and the Turkish-letter check corrected |
@@ -142,7 +159,7 @@ same set against Claude on Bedrock (`live.test.ts`) has not been run.
 | `infra/lib/assistant.ts`, `help-center-stack.ts`, `viewer-request.js` | From the site, adapted: no deploy role, budget or e-mail; Bedrock only when configured; no account-specific values |
 | Evidence floor, extractive writer, vocabulary, PostgreSQL client, local server | Written here |
 | The 24 articles, the status table, the glossary, the pinned overview | Written here, from the architecture overview |
-| Evaluation set, provenance tests, publication guard, CI | Written here |
+| Evaluation set, held-out set, provenance tests, publication guard, CI | Written here |
 
 ## Repository
 
@@ -155,7 +172,7 @@ src/
   app/, components/   the site: articles, the Ask page, both languages
 backend/
   src/                router, retrieval, evidence floor, writers, answer check, API, Lambda handlers, local server
-  test/, eval/        unit tests on PGlite, the evaluation set
+  test/, eval/        unit tests on PGlite, the evaluation and held-out sets
 infra/                AWS CDK stack and its tests
 scripts/              build-output check, publication guard
 docs/                 the answer check, the evaluation, deploying
@@ -168,9 +185,9 @@ answered a question in this repository: the Bedrock code is tested against
 fakes only. The answer check blocks invented technologies, numbers, statuses
 and contact details when they match the glossary and its rules; a technology
 name missing from the glossary would pass unnoticed. It cannot prove that a
-sentence reads its source correctly. The evaluation result is a measurement of
-these 54 cases with the local writer, not a measure of answer quality in
-general.
+sentence reads its source correctly. The evaluation results are measurements
+of these 54 original and 16 held-out cases with the local writer and
+embedder, not a measure of answer quality in general.
 
 I develop with AI coding tools under my own review and remain responsible for
 the architecture, the code quality and every decision.

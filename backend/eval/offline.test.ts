@@ -19,7 +19,7 @@ import { runEvaluation, summarise, table, type CaseResult } from './run';
  * (`live.test.ts`), which needs Amazon Bedrock and has not been run.
  */
 
-/** The result recorded in the README; a change that lowers it fails here. */
+/** The floor: the original set's result before the ranking change (docs/EVALUATION.md); a change that lowers it fails here. */
 const RECORDED = { answeredWithRightArticle: 39, answerable: 40 };
 
 let database: TestDatabase;

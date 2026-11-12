@@ -2,7 +2,7 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { HashingEmbedder } from '../src/embeddings/hashing';
 import { mapLimited, type Embedder } from '../src/embeddings/types';
 import { ingest } from '../src/ingest';
-import { retrieve } from '../src/retrieval';
+import { keywordRanking, retrieve } from '../src/retrieval';
 import { helpCorpus } from './corpus';
 import { testDatabase, type TestDatabase } from './pglite';
 
@@ -99,6 +99,24 @@ describe('hybrid retrieval', () => {
     const sources = await retrieve(database.db, embedder, 'Azure OpenAI retrieval', 'en', { limit: 10, maxCharacters: 600 });
     const total = sources.reduce((sum, source) => sum + source.text.length, 0);
     expect(sources.length === 1 || total <= 600).toBe(true);
+  });
+
+  it('lets a word few passages use outweigh one that many passages repeat', async () => {
+    const own = await testDatabase();
+    try {
+      const part = (n: number, text: string) => ({ id: `article:notes:part-${n}:en`, locale: 'en' as const, article: 'notes', url: `/en/articles/notes/#part-${n}`, title: `Part ${n}`, text });
+      const corpus = { ...helpCorpus(), chunks: [part(1, 'A test, then another test.'), part(2, 'One test and a second test.'), part(3, 'The test passed the test.'), part(4, 'An audit.')] };
+      await ingest(own.db, corpus, embedder);
+      // Unweighted, the three passages that say "test" twice would come first; "audit" is in one passage only.
+      expect((await keywordRanking(own.db, 'audit test', 'en'))[0]).toBe('article:notes:part-4:en');
+    } finally {
+      await own.close();
+    }
+  });
+
+  it('does not search the words every article uses', async () => {
+    expect(await keywordRanking(database.db, 'What is the platform?', 'en')).toEqual([]);
+    expect(await keywordRanking(database.db, 'platform security', 'en')).toEqual(await keywordRanking(database.db, 'security', 'en'));
   });
 
   it('cannot be steered into SQL by the question', async () => {

@@ -48,7 +48,7 @@ describe('rate limits', () => {
     const salt = await rateKeySalt(database.db);
     const key = callerKey(salt, '203.0.113.7');
     expect(key).toMatch(/^[0-9a-f]{32}$/);
-    expect(key).not.toContain('203');
+    expect(key).not.toContain('203.0.113.7');
     expect(callerKey(salt, '203.0.113.8')).not.toBe(key);
     expect(callerKey('another-salt', '203.0.113.7')).not.toBe(key);
   });

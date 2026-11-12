@@ -18,8 +18,9 @@ import { capabilitiesIn, capabilityMentions, namesCapability, termsIn } from './
  *   markup; the requested language; a sensible length.
  *
  * It cannot prove that an answer is true — a sentence can cite the right
- * passage and still misread it. It makes the cheap failures impossible and
- * says which rule broke, without echoing the refused text into any log.
+ * passage and still misread it. It blocks the cheap failures when they match
+ * the glossary and the rules, and says which rule broke, without echoing the
+ * refused text into any log.
  */
 export type GateRule =
   | 'empty'

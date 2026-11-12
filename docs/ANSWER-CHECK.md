@@ -52,9 +52,11 @@ without a second attempt.
 ## What it cannot do
 
 It cannot prove that an answer is true. A sentence can cite the right passage,
-use only its words and numbers, and still misread it. The check makes the
-cheap failures impossible — an invented technology, number, status or contact
-detail, an uncited claim — and names the rule that broke.
+use only its words and numbers, and still misread it. The check blocks the
+cheap failures — an invented technology, number, status or contact detail, an
+uncited claim — when they match the glossary and the rules above, and names the
+rule that broke. A technology name missing from the glossary would pass
+unnoticed.
 
 The articles are held to the same rules: a test runs the status check over
 every sentence of every article, and the provenance tests hold every number

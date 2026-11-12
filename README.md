@@ -165,8 +165,9 @@ docs/                 the answer check, the evaluation, deploying
 
 The help center is not deployed and has no users. No language model has
 answered a question in this repository: the Bedrock code is tested against
-fakes only. The answer check makes inventions of technologies, numbers,
-statuses and contact details impossible to deliver; it cannot prove that a
+fakes only. The answer check blocks invented technologies, numbers, statuses
+and contact details when they match the glossary and its rules; a technology
+name missing from the glossary would pass unnoticed. It cannot prove that a
 sentence reads its source correctly. The evaluation result is a measurement of
 these 54 cases with the local writer, not a measure of answer quality in
 general.

@@ -31,7 +31,7 @@ export const dataSecurityArticles: Article[] = [
         paragraphs: [
           {
             en: 'Row-version checks protect edits, and unique constraints support duplicate detection. Financial and commerce operations use explicit transactions and database locking, proved on a real SQL Server engine in CI.',
-            tr: 'Satır sürümü denetimleri düzenlemeleri korur, benzersizlik kısıtları da yinelenen kayıtların tespitine yardım eder. Finans ve e-ticaret işlemleri açık veritabanı işlemleri ve kilitler kullanır; bu, CI’da gerçek bir SQL Server motorunda kanıtlanmıştır.',
+            tr: 'Satır sürümü denetimleri düzenlemeleri korur, benzersizlik kısıtları da yinelenen kayıtların tespitine yardım eder. Finans ve e-ticaret işlemlerinde açıkça tanımlanmış veritabanı işlemleri ve kilitler kullanılır; bu, CI’da gerçek bir SQL Server motorunda kanıtlanmıştır.',
           },
         ],
       },
@@ -63,7 +63,7 @@ export const dataSecurityArticles: Article[] = [
         paragraphs: [
           {
             en: 'Staff services enforce access checks behind a shared admin sign-in. Finance resolves company membership on the server and applies company-scoped roles to every service operation; no tool schema can name a company.',
-            tr: 'Personel servisleri, ortak bir yönetici oturum açmanın arkasında erişim denetimleri uygular. Finans tarafında şirket üyeliği sunucuda belirlenir ve her servis işlemine şirkete özgü roller uygulanır; hiçbir araç şeması bir şirketi adıyla belirtemez.',
+            tr: 'Personel servisleri ortak bir yönetici girişinin arkasında çalışır ve erişim denetimleri uygular. Finans tarafında şirket üyeliği sunucuda belirlenir ve her servis işlemine şirkete özgü roller uygulanır; hiçbir araç şeması bir şirketi adıyla belirtemez.',
           },
         ],
       },

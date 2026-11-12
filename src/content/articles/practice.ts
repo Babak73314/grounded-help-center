@@ -27,7 +27,7 @@ export const practiceArticles: Article[] = [
         paragraphs: [
           {
             en: 'The author codes and debugs hands-on and uses AI coding tools for implementation support, automated testing and independent review. The author sets the scope and the acceptance criteria, reviews every change and its test evidence, and keeps responsibility for the architecture, the code quality and every merge and deployment decision.',
-            tr: 'Yazar kodu bizzat yazar ve hata ayıklar; yapay zekâ kodlama araçlarını uygulama desteği, otomatik test ve bağımsız inceleme için kullanır. Kapsamı ve kabul ölçütlerini yazar belirler, her değişikliği ve test kanıtını inceler; mimarinin, kod kalitesinin ve her birleştirme ile dağıtım kararının sorumluluğu yazardadır.',
+            tr: 'Yazar kodu bizzat yazar ve hata ayıklar; yapay zekâ kodlama araçlarını geliştirme desteği, otomatik test ve bağımsız inceleme için kullanır. Kapsamı ve kabul ölçütlerini yazar belirler, her değişikliği ve test kanıtını inceler; mimarinin, kod kalitesinin ve her birleştirme ile dağıtım kararının sorumluluğu yazardadır.',
           },
         ],
       },
@@ -37,7 +37,7 @@ export const practiceArticles: Article[] = [
         paragraphs: [
           {
             en: 'GitHub Actions builds the solution and runs the C# and JavaScript suites on every pull request. The SQL Server suites (for example 165 gated finance tests and 141 commerce engine tests) run in separate jobs against a throwaway engine, so no engine-dependent test can be silently skipped. Paid live-model evaluations are opt-in and recorded separately.',
-            tr: 'GitHub Actions her pull request’te çözümü derler ve C# ile JavaScript test paketlerini çalıştırır. SQL Server test paketleri (örneğin 165 kapılı finans testi ve 141 e-ticaret motoru testi) geçici bir motora karşı ayrı işlerde çalışır; böylece motora bağlı hiçbir test sessizce atlanamaz. Ücretli canlı model değerlendirmeleri isteğe bağlıdır ve ayrı kaydedilir.',
+            tr: 'GitHub Actions her pull request’te çözümü derler ve C# ile JavaScript test paketlerini çalıştırır. SQL Server test paketleri (örneğin 165 koşullu finans testi ve 141 e-ticaret motoru testi) geçici bir motora karşı ayrı işlerde çalışır; böylece motora bağlı hiçbir test sessizce atlanamaz. Ücretli canlı model değerlendirmeleri isteğe bağlıdır ve ayrı kaydedilir.',
           },
         ],
       },
@@ -69,7 +69,7 @@ export const practiceArticles: Article[] = [
         paragraphs: [
           {
             en: 'Grounded chat, live voice, administration, quotas, fencing and database infrastructure exist once and are composed per application. A new assistant or copilot starts from tested parts.',
-            tr: 'Kaynağa dayalı sohbet, canlı ses, yönetim, kotalar, çitleme ve veritabanı altyapısı bir kez vardır ve her uygulama için birleştirilir. Yeni bir asistan veya yardımcı, test edilmiş parçalardan başlar.',
+            tr: 'Kaynağa dayalı sohbet, canlı ses, yönetim, kotalar, içerik yalıtma ve veritabanı altyapısı tek bir yerde bulunur ve her uygulama için ayrı ayrı bir araya getirilir. Yeni bir asistan veya yardımcı, test edilmiş parçalardan başlar.',
           },
         ],
       },
@@ -79,7 +79,7 @@ export const practiceArticles: Article[] = [
         paragraphs: [
           {
             en: 'The pattern of code-owned calculations, typed tools, claim validation and human approvals transfers directly to finance, operations, pricing and any domain where a model’s number could be acted on.',
-            tr: 'Koda ait hesaplamalar, tipli araçlar, iddia doğrulaması ve insan onayları deseni; finansa, operasyonlara, fiyatlandırmaya ve bir modelin verdiği sayıya göre hareket edilebilecek her alana doğrudan aktarılır.',
+            tr: 'Hesaplamaları koda bırakan ve tipli araçlar, iddia doğrulaması ile insan onayları kullanan desen; finansa, operasyonlara, fiyatlandırmaya ve bir modelin verdiği sayıya göre hareket edilebilecek her alana doğrudan aktarılır.',
           },
         ],
       },
@@ -89,7 +89,7 @@ export const practiceArticles: Article[] = [
         paragraphs: [
           {
             en: 'Server-side allow-lists, untrusted-content fencing, output gates, audit trails and switched-off defaults are platform features, not per-project promises.',
-            tr: 'Sunucu tarafı izin listeleri, güvenilmeyen içeriğin çitlenmesi, çıktı kapıları, denetim izleri ve kapalı varsayılanlar, proje başına verilen sözler değil, platform özellikleridir.',
+            tr: 'Sunucu tarafı izin listeleri, güvenilmeyen içeriğin yalıtılması, çıktı kapıları, denetim izleri ve kapalı varsayılanlar, proje başına verilen sözler değil, platform özellikleridir.',
           },
         ],
       },
@@ -99,7 +99,7 @@ export const practiceArticles: Article[] = [
         paragraphs: [
           {
             en: 'Branding, tone, safety rules, knowledge content, switches and cloud resources are configuration. A new vertical, host or adapter is bounded code.',
-            tr: 'Marka görünümü, üslup, güvenlik kuralları, bilgi içeriği, anahtarlar ve bulut kaynakları yapılandırmadır. Yeni bir dikey, host veya adaptör sınırlı bir koddur.',
+            tr: 'Marka görünümü, üslup, güvenlik kuralları, bilgi içeriği, anahtarlar ve bulut kaynakları yapılandırmadır. Yeni bir dikey, host veya adaptör ise kapsamı belirli bir kod parçasıdır.',
           },
           {
             en: 'Connecting a real hotel, ERP, hospital or banking system is scoped integration work with its own testing and compliance obligations. The platform makes the first part cheap and the second part bounded; it does not make it zero.',

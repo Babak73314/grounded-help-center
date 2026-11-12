@@ -85,7 +85,7 @@ const TEXT = {
   },
   notCovered: {
     en: 'The help center does not cover that. Its articles describe the platform only as far as its architecture overview does.',
-    tr: 'Yardım merkezi bu konuyu kapsamıyor. Makaleleri platformu yalnızca mimari genel bakışının anlattığı kadarıyla anlatır.',
+    tr: 'Yardım merkezi bu konuyu kapsamıyor. Makaleleri, platformu yalnızca mimari genel bakışta yer alan bilgiler ölçüsünde açıklar.',
   },
   withheld: {
     en: 'No answer could be written that passes the check against the articles, so here are the most relevant articles instead.',
@@ -93,7 +93,7 @@ const TEXT = {
   },
   busy: {
     en: 'The assistant has drafted as many answers as it may today. Here are the most relevant articles.',
-    tr: 'Asistan bugün yazabileceği kadar yanıt yazdı. En ilgili makaleler aşağıda.',
+    tr: 'Asistan bugünkü yanıt sınırına ulaştı. En ilgili makaleler aşağıda.',
   },
 } satisfies Record<string, Words>;
 

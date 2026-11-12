@@ -71,7 +71,7 @@ export const applicationArticles: Article[] = [
         paragraphs: [
           {
             en: 'Reservation requests are re-priced on the server, saved with consent and processed through a staff queue. They are requests, never bookings.',
-            tr: 'Rezervasyon talepleri sunucuda yeniden fiyatlandırılır, onayla kaydedilir ve bir personel kuyruğu üzerinden işlenir. Bunlar taleptir, hiçbir zaman kesin rezervasyon değildir.',
+            tr: 'Rezervasyon talepleri sunucuda yeniden fiyatlandırılır, rıza alınarak kaydedilir ve bir personel kuyruğu üzerinden işlenir. Bunlar taleptir, hiçbir zaman kesin rezervasyon değildir.',
           },
         ],
       },
@@ -91,7 +91,7 @@ export const applicationArticles: Article[] = [
         paragraphs: [
           {
             en: 'The hotel demo is DEMO, with a public Azure deployment: a fictional property with synthetic data, live voice on, no property-management system and no customer.',
-            tr: 'Otel demosu DEMO durumundadır ve herkese açık bir Azure dağıtımı vardır: sentetik verilerle kurgusal bir tesis, açık canlı ses, mülk yönetim sistemi yok ve müşteri yok.',
+            tr: 'Otel demosu DEMO durumundadır ve herkese açık bir Azure dağıtımı vardır: tesis kurgusaldır ve sentetik veriler kullanır; canlı ses açıktır; mülk yönetim sistemi ve müşteri yoktur.',
           },
           {
             en: 'A working slice of the hotel path is public, with its tests, in the grounded-hotel-concierge repository.',
@@ -138,7 +138,7 @@ export const applicationArticles: Article[] = [
         paragraphs: [
           {
             en: 'Appointment-request services revalidate the selected time and the consent.',
-            tr: 'Randevu talebi servisleri seçilen saati ve onayı yeniden doğrular.',
+            tr: 'Randevu talebi servisleri seçilen saati ve verilen rızayı yeniden doğrular.',
           },
         ],
       },
@@ -175,7 +175,7 @@ export const applicationArticles: Article[] = [
         paragraphs: [
           {
             en: 'The real-estate advisor is a bilingual property advisor and listing administration for a fictional agency.',
-            tr: 'Gayrimenkul danışmanı, kurgusal bir emlak ofisi için iki dilli bir emlak danışmanı ve ilan yönetimidir.',
+            tr: 'Gayrimenkul danışmanı, kurgusal bir emlak ofisi için iki dilli bir emlak danışmanlığı ve ilan yönetimi uygulamasıdır.',
           },
         ],
       },
@@ -275,7 +275,7 @@ export const applicationArticles: Article[] = [
         paragraphs: [
           {
             en: 'Cost centres, open items and ageing, cash and bank records, budgets and deterministic cash-flow forecasts extend the domain across about thirty Blazor screens.',
-            tr: 'Maliyet merkezleri, açık kalemler ve yaşlandırma, kasa ve banka kayıtları, bütçeler ve deterministik nakit akışı tahminleri, alanı yaklaşık otuz Blazor ekranına yayar.',
+            tr: 'Maliyet merkezleri, açık kalemler ve yaşlandırma, kasa ve banka kayıtları, bütçeler ve deterministik nakit akışı tahminleri alanı genişletir; bunlar yaklaşık otuz Blazor ekranında sunulur.',
           },
         ],
       },
@@ -315,11 +315,11 @@ export const applicationArticles: Article[] = [
         paragraphs: [
           {
             en: 'Finance and accounting is LOCAL: engineering-complete, with gated SQL Server suites in CI and one controlled live copilot smoke run. It has never been deployed and has no statutory certification.',
-            tr: 'Finans ve muhasebe LOCAL durumundadır: mühendislik açısından tamamlanmıştır; CI’da kapılı SQL Server test paketleri ve tek bir kontrollü canlı asistan duman testi vardır. Hiçbir zaman yayına alınmamıştır ve yasal bir sertifikası yoktur.',
+            tr: 'Finans ve muhasebe LOCAL durumundadır: mühendislik açısından tamamlanmıştır; CI’da koşullu SQL Server test paketleri ve tek bir kontrollü canlı asistan duman testi vardır. Hiçbir zaman yayına alınmamıştır ve yasal bir sertifikası yoktur.',
           },
           {
             en: 'Its gated SQL Server suite of 165 finance tests runs in a separate CI job against a throwaway engine.',
-            tr: 'Kapılı SQL Server üzerindeki 165 finans testi, geçici bir motora karşı ayrı bir CI işinde çalışır.',
+            tr: '165 finans testinden oluşan koşullu SQL Server paketi, ayrı bir CI işinde geçici bir motor üzerinde çalışır.',
           },
         ],
       },

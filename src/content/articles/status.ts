@@ -59,7 +59,7 @@ export const statusArticles: Article[] = [
         paragraphs: [
           {
             en: 'Integrations with hotel, hospital, ERP and bank-feed systems are contracts only: preview-then-draft paths exist, and nothing is connected.',
-            tr: 'Otel, hastane, ERP ve banka akışı sistemleriyle entegrasyonlar yalnızca sözleşme düzeyindedir: önizleme-sonra-taslak yolları vardır ve hiçbir şey bağlı değildir.',
+            tr: 'Otel, hastane, ERP ve banka akışı sistemleriyle entegrasyonlar yalnızca sözleşme düzeyindedir: önce önizleme gösterip sonra taslak oluşturan akışlar vardır ve hiçbir şey bağlı değildir.',
           },
           {
             en: 'The platform runs as a single instance: quotas and caps are per process, sized for single-instance App Services.',

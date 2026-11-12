@@ -7,7 +7,7 @@ export const aiArticles: Article[] = [
     title: { en: 'How a grounded answer is produced', tr: 'Kaynağa dayalı bir yanıt nasıl üretilir' },
     summary: {
       en: 'The four steps of a grounded text request, retrieval and prompts, and the orchestration engine.',
-      tr: 'Kaynağa dayalı bir metin isteğinin dört adımı, erişim ve istemler, ve orkestrasyon motoru.',
+      tr: 'Kaynağa dayalı bir metin isteğinin dört adımı; erişim ve istemler; orkestrasyon motoru.',
     },
     readme: ['§2', '§4'],
     sections: [
@@ -19,7 +19,7 @@ export const aiArticles: Article[] = [
           { en: '1 Route: bound the request and pick the path in code.', tr: '1 Yönlendirme: isteği sınırla ve izlenecek yolu kodda seç.' },
           { en: '2 Ground: retrieve documents or business facts.', tr: '2 Temellendirme: belgeleri veya iş bilgilerini getir.' },
           { en: '3 Generate: build a grounded prompt and get the draft.', tr: '3 Üretim: kaynağa dayalı bir istem oluştur ve taslağı al.' },
-          { en: '4 Deliver: validate, attach citations and return.', tr: '4 Teslim: doğrula, kaynak göstergelerini ekle ve döndür.' },
+          { en: '4 Deliver: validate, attach citations and return.', tr: '4 Teslim: doğrula, atıfları ekle ve döndür.' },
         ],
       },
       {
@@ -28,7 +28,7 @@ export const aiArticles: Article[] = [
         paragraphs: [
           {
             en: 'Azure AI Search combines keyword and vector retrieval with semantic reranking, behind a per-host index allow-list that is checked at startup. Retrieved passages are numbered, fenced as untrusted data through one fencing routine, and combined with domain instructions and safety rules.',
-            tr: 'Azure AI Search, anahtar kelime ve vektör erişimini anlamsal yeniden sıralamayla birleştirir; bunu, başlangıçta denetlenen ve her host için ayrı tutulan bir dizin izin listesinin arkasında yapar. Getirilen pasajlar numaralandırılır, tek bir çitleme rutiniyle güvenilmeyen veri olarak çitlenir ve alan talimatları ile güvenlik kurallarıyla birleştirilir.',
+            tr: 'Azure AI Search, anahtar kelime ve vektör erişimini anlamsal yeniden sıralamayla birleştirir; bunu, başlangıçta denetlenen ve her host için ayrı tutulan bir dizin izin listesinin arkasında yapar. Getirilen pasajlar numaralandırılır, tek bir yalıtma yordamıyla güvenilmeyen veri olarak yalıtılır ve alan talimatları ile güvenlik kurallarıyla birleştirilir.',
           },
           {
             en: 'An in-process lexical index serves machines without Azure AI Search.',
@@ -106,7 +106,7 @@ export const aiArticles: Article[] = [
         paragraphs: [
           {
             en: 'Where a model writes text that a customer could act on, a deterministic validator checks the draft before it is shown.',
-            tr: 'Bir modelin, müşterinin göre hareket edebileceği bir metin yazdığı her yerde, taslak gösterilmeden önce deterministik bir doğrulayıcı tarafından denetlenir.',
+            tr: 'Bir modelin, müşterinin ona göre hareket edebileceği bir metin yazdığı her yerde, taslak gösterilmeden önce deterministik bir doğrulayıcı tarafından denetlenir.',
           },
         ],
       },

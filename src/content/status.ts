@@ -84,7 +84,7 @@ export const capabilities: Capability[] = [
     state: { en: 'LOCAL', tr: 'LOCAL' },
     meaning: {
       en: 'Engineering-complete; gated SQL Server suites run in CI; one controlled live copilot smoke run; never deployed; no statutory certification',
-      tr: 'Mühendislik açısından tamamlanmış; kapılı SQL Server test paketleri CI’da çalışıyor; tek bir kontrollü canlı asistan duman testi; hiç yayına alınmamış; yasal sertifika yok',
+      tr: 'Mühendislik açısından tamamlanmış; koşullu SQL Server test paketleri CI’da çalışıyor; tek bir kontrollü canlı asistan duman testi; hiç yayına alınmamış; yasal sertifika yok',
     },
     article: 'accounting',
   },

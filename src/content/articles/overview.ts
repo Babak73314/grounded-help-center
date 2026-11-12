@@ -35,11 +35,11 @@ export const overviewArticles: Article[] = [
         paragraphs: [
           {
             en: 'The central design separates AI-generated language from authoritative business operations.',
-            tr: 'Temel tasarım, yapay zekânın ürettiği dili yetkili iş işlemlerinden ayırır.',
+            tr: 'Temel tasarım, yapay zekânın ürettiği dili esas alınan iş işlemlerinden ayırır.',
           },
         ],
         items: [
-          { en: 'Retrieval grounds document answers.', tr: 'Belgelere dayalı yanıtları erişim (retrieval) temellendirir.' },
+          { en: 'Retrieval grounds document answers.', tr: 'Belge yanıtları, erişim (retrieval) yoluyla kaynağa dayandırılır.' },
           {
             en: 'Code calculates rates, availability, schedules and financial figures.',
             tr: 'Fiyatları, müsaitliği, takvimleri ve finansal rakamları kod hesaplar.',
@@ -50,7 +50,7 @@ export const overviewArticles: Article[] = [
           },
           {
             en: 'Where a model writes text that a customer could act on, a deterministic validator checks the draft before it is shown.',
-            tr: 'Bir modelin, müşterinin göre hareket edebileceği bir metin yazdığı her yerde, taslak gösterilmeden önce deterministik bir doğrulayıcı tarafından denetlenir.',
+            tr: 'Bir modelin, müşterinin ona göre hareket edebileceği bir metin yazdığı her yerde, taslak gösterilmeden önce deterministik bir doğrulayıcı tarafından denetlenir.',
           },
         ],
       },
@@ -192,7 +192,7 @@ export const overviewArticles: Article[] = [
         paragraphs: [
           {
             en: 'Engineering automation consists of xUnit and Node test suites, structural and configuration tests, SQL Server integration gates, GitHub Actions CI with a separate gated SQL Server job, and an OIDC-based deployment workflow with version-provenance checks.',
-            tr: 'Mühendislik otomasyonu; xUnit ve Node test paketlerinden, yapısal ve yapılandırma testlerinden, SQL Server entegrasyon kapılarından, ayrı ve kapılı bir SQL Server işi olan GitHub Actions CI’dan ve sürüm kaynağı denetimli, OIDC tabanlı bir dağıtım iş akışından oluşur.',
+            tr: 'Mühendislik otomasyonu; xUnit ve Node test paketlerinden, yapısal ve yapılandırma testlerinden, SQL Server entegrasyon denetimlerinden, ayrı ve koşullu bir SQL Server işi içeren GitHub Actions CI’dan ve sürüm kaynağı denetimli, OIDC tabanlı bir dağıtım iş akışından oluşur.',
           },
         ],
       },

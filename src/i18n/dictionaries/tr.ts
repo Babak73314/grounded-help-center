@@ -4,7 +4,7 @@ import type { Dictionary } from './en';
 export const tr: Dictionary = {
   meta: {
     title: 'Yardım Merkezi',
-    description: 'Platform için, yalnızca makalelerinden yanıt veren ve makalelerin kapsamadığı soruları reddeden bir asistanı olan yardım merkezi.',
+    description: 'Platformu anlatan bir yardım merkezi; asistanı yalnızca kendi makalelerine dayanarak yanıt verir ve makalelerin kapsamadığı soruları reddeder.',
   },
   nav: {
     articles: 'Makaleler',
@@ -40,7 +40,7 @@ export const tr: Dictionary = {
   },
   article: {
     onThisPage: 'Bu sayfada',
-    source: 'Mimari genel bakışın şu bölümlerinden yazıldı: {sections}.',
+    source: 'Mimari genel bakışın şu bölümlerine dayanılarak yazıldı: {sections}.',
     sourceLink: 'Mimari genel bakışı okuyun',
     previous: 'Önceki',
     next: 'Sonraki',
@@ -70,7 +70,7 @@ export const tr: Dictionary = {
     pages: 'Makaleler',
     byStatus: 'Teslim durumu tablosundan kodla yanıtlandı',
     byQuote: 'Makalelerden kodla alıntılandı — bu sürümde dil modeli yok',
-    byModel: 'Amazon Bedrock üzerinde Claude yazdı; her cümle kaynağıyla denetlendi',
+    byModel: 'Amazon Bedrock üzerinde Claude tarafından yazıldı; her cümle kaynağıyla karşılaştırılarak denetlendi',
     refused: 'Yardım merkezinin kapsamında değil',
     withheld: 'Denetlenmiş bir yanıt yok — bunun yerine en ilgili makaleler',
     busy: 'Günlük sınıra ulaşıldı — bunun yerine en ilgili makaleler',

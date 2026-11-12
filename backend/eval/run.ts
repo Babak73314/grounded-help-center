@@ -64,14 +64,21 @@ export function judge(entry: EvalQuestion, answer: AskAnswer): { passed: boolean
 }
 
 /**
- * Loads the corpus into `db`, then puts every question, in both languages,
+ * Loads the corpus into `db`, then puts every question of `set` (the
+ * original evaluation set unless another is given), in both languages,
  * through the same `answerQuestion` the API calls — routing, retrieval,
  * evidence floor, writer and answer check.
  */
-export async function runEvaluation(db: SqlClient, corpus: Corpus, embedder: Embedder, model: AnswerModel): Promise<CaseResult[]> {
+export async function runEvaluation(
+  db: SqlClient,
+  corpus: Corpus,
+  embedder: Embedder,
+  model: AnswerModel,
+  set: readonly EvalQuestion[] = questions,
+): Promise<CaseResult[]> {
   await ingest(db, corpus, embedder);
   const results: CaseResult[] = [];
-  for (const entry of questions) {
+  for (const entry of set) {
     for (const locale of ['en', 'tr'] as const) {
       const question = entry[locale];
       const { answer, telemetry } = await answerQuestion(question, locale, {
